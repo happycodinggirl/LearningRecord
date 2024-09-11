@@ -1,7 +1,6 @@
 package com.example.learningrecord.source
 
 import android.util.Log
-import androidx.paging.LoadType
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.learningrecord.bean.DemoReqData
@@ -12,10 +11,8 @@ class ADataSource: PagingSource<Int, DemoReqData.DataBean.DatasBean>() {
     override fun getRefreshKey(state: PagingState<Int, DemoReqData.DataBean.DatasBean>): Int? {
         return null
     }
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DemoReqData.DataBean.DatasBean> {
             return try {
-
                 val currentPage= params.key?:1
                 val demoReqData=DataRespority().loadData(currentPage)
                 Log.v("tt","currentPage is $currentPage")

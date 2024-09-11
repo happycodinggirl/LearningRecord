@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.learningrecord.network.ioThread
 import com.example.learningrecord.ui.theme.LearningRecordTheme
 import com.example.learningrecord.viewmodel.MainViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -68,7 +69,11 @@ fun PagingList() {
             items(data.itemCount){index->
                 var itemContent=data[index]
                 Log.v("item","------itemContent is $itemContent")
-                Text(text = itemContent?.author.toString())
+                Text(text = itemContent?.author.toString(), modifier = Modifier.padding(20.dp).clickable {
+                    ioThread {
+                        Log.v("tt","------ioThread run thread is ${Thread.currentThread().name}")
+                    }
+                })
             }
             Log.v("tt","-----loadState is ${data.loadState.refresh}")
         }
